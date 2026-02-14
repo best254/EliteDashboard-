@@ -1,14 +1,31 @@
-<!doctype html>
-<title>Login</title>
-<h2>Login</h2>
-<form method="post">
-  <input name="username" placeholder="Username" required>
-  <input name="password" placeholder="Password" type="password" required>
-  <button type="submit">Login</button>
-</form>
-<a href="/signup">Sign Up</a>
-{% with messages = get_flashed_messages() %}
-  {% for message in messages %}
-    <p>{{ message }}</p>
-  {% endfor %}
-{% endwith %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login / Signup</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="POST" action="{{ url_for('login') }}">
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <h2>Signup</h2>
+    <form method="POST" action="{{ url_for('signup') }}">
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <button type="submit">Signup</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>
